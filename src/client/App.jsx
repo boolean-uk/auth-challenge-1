@@ -23,7 +23,17 @@ function App() {
     });
   };
 
-  const handleLogin = async ({ username, password }) => {};
+  const handleLogin = async ({ username, password }) => {
+    fatch("http://localhost:4000/user/login", {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ username, password }),
+    })
+      .then((res) => res.json)
+      .then((res) => {
+        localStorage.setItem("token", res.data);
+      });
+  };
 
   const handleCreateMovie = async ({ title, description, runtimeMins }) => {};
 
